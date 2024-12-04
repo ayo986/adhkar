@@ -119,7 +119,9 @@ scene.setup = function(){
     menu.lastIndex = -1
     menu.bg = 'hsl(100, 30%, 20%)'
     // menu.hasBg = false
+
     menu.distanceofmove = 0
+    menu.friction = 1
     menu.lineColor = 'hsl(120, 50%, 70%)'
     menu.space = 16
     menu.onChange = function() {
