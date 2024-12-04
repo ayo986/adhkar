@@ -111,6 +111,8 @@ scene.setup = function(){
     lv.direction = 'v'
     lv.hasBg = false
     lv.displayItems = 1
+    lv.distanceofmove = 0
+    lv.friction = 1
     this.pack(lv)
     let menu = new menuView(cx, 30, width, 60)
     menu.displayItems = 7
