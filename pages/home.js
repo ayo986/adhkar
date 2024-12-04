@@ -91,7 +91,7 @@ class itemText extends moveClip{
 let scene = new Scene()
 scene.setup = function(){
     this.childs = []
-    this.bg = 'hsl(100, 10%, 20%)'
+    this.bg = 'hsl(180, 20%, 40%)'
 
     let tit = new Button({
         text: '',
@@ -102,7 +102,8 @@ scene.setup = function(){
         alignText: 'center',
         fontSize: 18,
         corner:[],
-        bg: 'hsl(100, 30%, 30%)'
+        // hasBg: false,
+        bg: 'hsl(180, 60%, 20%)'
     })
     this.pack(tit)
 
@@ -110,19 +111,19 @@ scene.setup = function(){
     let lv = new listMenuView(cx, hh/2 + 120, width, hh)
     lv.direction = 'v'
     lv.hasBg = false
-    lv.displayItems = 1
+    lv.displayItems = 2
     lv.distanceofmove = 0
     lv.friction = 1
+    lv.lineColor = 'hsl(30, 50%, 50%)'
     this.pack(lv)
     let menu = new menuView(cx, 30, width, 60)
     menu.displayItems = 7
     menu.lastIndex = -1
-    menu.bg = 'hsl(100, 30%, 20%)'
+    menu.bg = 'hsl(180, 50%, 30%)'
     // menu.hasBg = false
-
     menu.distanceofmove = 0
     menu.friction = 1
-    menu.lineColor = 'hsl(120, 50%, 70%)'
+    menu.lineColor = 'hsl(30, 50%, 50%)'
     menu.space = 16
     menu.onChange = function() {
         let item = this.items[this.index-1]
@@ -143,11 +144,11 @@ scene.setup = function(){
                 b.ncount = v.count
                 // b.clip = false
                 // b.shape = 2
-                b.bg = 'hsl(100, 20%, 36%)'
+                b.bg = 'hsl(180, 20%, 45%)'
                 b.fg = [0]
                 // b.hasBg = false
                 b.fontSize = 18
-                b.corner = []
+                // b.corner = [20]
                 lv.addItem(b)
             }
         }
@@ -163,12 +164,11 @@ scene.setup = function(){
             b.text = v.category 
             // b.clip = false
             // b.shape = 2
-            b.bg = 'hsl(100, 30%, 30%)'
+            b.bg = 'hsl(180, 60%, 20%)'
             b.fg = [200]
-
+            b.corner = [20]
             b.fontSize = 12
             b.array = v.array
-            b.corner = []
             menu.addItem(b)
         }
     })    
