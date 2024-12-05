@@ -102,7 +102,7 @@ class itemText extends moveClip{
         bg: rgb,
         fg: this.textColor,
         text: this.ncount,
-        fontSize:this.fontSize*0.9,
+        fontSize:14,
         toggel: {
             defualt: [200, 100, 50],
             other: [50, 100, 200]
