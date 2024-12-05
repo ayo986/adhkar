@@ -14,7 +14,7 @@ class itemText extends moveClip{
       this.text = text
       let [ox, oy] = this.Origin()
       let [ow, oh] = this.Size()
-      let b = new Text('A', 0, 0, 40, 40)
+      let b = new Text()
       b.set({
         shape: 2,
         origin: CENTER_CENTER,
@@ -36,7 +36,45 @@ class itemText extends moveClip{
       })
       this.pack(b)
 
+      let one = new Text('+', 0,  0, 30, 30)
+      one.set({
+          bg: 'hsl(100, 50%, 30%)',
+          fg: color(200)
+      })
+      one.mousepressed = function(x, y, b){
+        let p = this.Parent()
+        if (b == 1) {
+            this.opacity = 50
+            p.fontSize = p.fontSize + 1
+        }
+      }
+
+      one.mousereleased = function(x, y, b){
+        this.opacity = 100
+      }
+      this.pack(one)
+
+      let two = new Text('-', 0,  0, 30, 30)
+      two.set({
+          bg: color(20),
+          fg: color(200)
+      })
+
+      two.mousepressed = function(x, y, b){
+        let p = this.Parent()
+        if (b == 1) {
+            this.opacity = 50
+            p.fontSize = p.fontSize - 1
+        }
+      }
+
+      two.mousereleased = function(x, y, b){
+        this.opacity = 100
+      }
+      this.pack(two)
       this.timer = b
+      this.fontA = one
+      this.fontB = two
     }
 
     draw(){
@@ -53,9 +91,9 @@ class itemText extends moveClip{
       noStroke()
       let rgb = this.ncount > 0 ? this.toggel.defualt : this.toggel.other
       fill(rgb)
-      let r = 30
-      let xx = -ox + r + 5
-      let yy = -oy + h - r - 5
+      let r = 20
+      let xx = ox - r - 5
+      let yy = -oy  + r + 5
       this.timer.set({
         x: xx,
         y: yy,
@@ -71,6 +109,15 @@ class itemText extends moveClip{
         }
       })
 
+      this.fontA.set({
+        x: -ox + this.fontA.width*2,
+        y: yy
+      })
+
+      this.fontB.set({
+        x: -ox + this.fontA.width - 5,
+        y: yy
+      })
       noStroke()
       noFill()
       if (this.outLine) {
@@ -80,7 +127,8 @@ class itemText extends moveClip{
       }
       // let hh = textHeight(this.text)
       textSize(this.fontSize)
-      text(this.text, -ox+w/2, -oy+h/2, this.width * 0.8, this.height * 0.9)
+      text(
+        this.text, -ox+w/2 , -oy+h/2 + this.height*0.1 , this.width * 0.8, this.height * 0.9)
 
 
     }
@@ -111,7 +159,7 @@ scene.setup = function(){
     let lv = new listMenuView(cx, hh/2 + 120, width, hh)
     lv.direction = 'v'
     lv.hasBg = false
-    lv.displayItems = 2
+    lv.displayItems = 1
     lv.distanceofmove = 0
     lv.friction = 1
     lv.lineColor = 'hsl(30, 50%, 50%)'
@@ -125,36 +173,38 @@ scene.setup = function(){
     menu.friction = 0.2
     menu.lineColor = 'hsl(30, 50%, 50%)'
     menu.space = 16
+    menu.showLine = false
     menu.onChange = function() {
-        let item = this.items[this.index-1]
-        if (item) {
-            lv.items = []
-            lv.childs = []
-
-            lv.acc = 0
-            tit.text =  '/' + item.array.length + '/ ' + item.text +  String.fromCharCode(9664)
-            for (const k in item.array) {
-                // print(k, item.array[k])
-
-                let v = item.array[k]
-                let b = new itemText()
-                b.alignText = 'center'
-                b.iconSize = 0
-                b.text = '/' + (parseInt(k)+1) + '/\r\n' + v.text 
-                b.ncount = v.count
-                // b.clip = false
-                // b.shape = 2
-                b.bg = 'hsl(180, 20%, 45%)'
-                b.fg = [0]
-                // b.hasBg = false
-                b.fontSize = 18
-                // b.corner = [20]
-                lv.addItem(b)
-            }
-        }
 
     }
     this.pack(menu)
+
+    function loadItem(item) {
+        lv.items = []
+        lv.childs = []
+
+        let [w, h] = item.Size()
+        lv.acc = 0
+        tit.text =  '/' + item.array.length + '/ ' + item.text +  String.fromCharCode(9664)
+        for (const k in item.array) {
+            // print(k, item.array[k])
+
+            let v = item.array[k]
+            let b = new itemText()
+            b.alignText = 'center'
+            b.iconSize = 0
+            b.text = '/' + (parseInt(k)+1) + '/\r\n' + v.text 
+            b.ncount = v.count
+            // b.clip = false
+            // b.shape = 2
+            b.bg = 'hsl(180, 20%, 45%)'
+            b.fg = [0]
+            // b.hasBg = false
+            b.fontSize = 16
+            // b.corner = [20]
+            lv.addItem(b)
+        }
+    }
     loadJSON('adhkar/adhkar.json',(e)=>{
         for (let i = 0; i < e.length; i++) {
             const v = e[i];
@@ -169,10 +219,30 @@ scene.setup = function(){
             b.corner = [20]
             b.fontSize = 12
             b.array = v.array
+            b.ontap = function(){
+                let p = this.Parent()
+                let item = this
+                if (!p.moving) {
+                    loadItem(item)
+                }
+            }
+            b.mousepressed = function(x, y, b){
+                
+                if (b == 1) {
+                    this.opacity = 50
+                }
+            }
+
+            b.mousereleased = function() {
+                this.opacity = 100
+            }
             menu.addItem(b)
         }
+        loadItem(menu.items[0])
     })    
     menu.setIndex(1)
+
+    
 }
 
 return scene
