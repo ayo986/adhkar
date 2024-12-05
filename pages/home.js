@@ -102,7 +102,7 @@ class itemText extends moveClip{
         bg: rgb,
         fg: this.textColor,
         text: this.ncount,
-        fontSize:14,
+        fontSize: 14,
         toggel: {
             defualt: [200, 100, 50],
             other: [50, 100, 200]
@@ -146,7 +146,7 @@ scene.setup = function(){
         width: width,
         height: 60,
         x: cx,
-        y: 90,
+        y: 30,
         alignText: 'center',
         fontSize: 18,
         corner:[],
@@ -164,7 +164,7 @@ scene.setup = function(){
     lv.friction = 1
     lv.lineColor = 'hsl(30, 50%, 50%)'
     this.pack(lv)
-    let menu = new menuView(cx, 30, width, 60)
+    let menu = new menuView(cx, 90, width, 60)
     menu.displayItems = 7
     menu.lastIndex = -1
     menu.bg = 'hsl(180, 50%, 30%)'
