@@ -38,6 +38,7 @@ class itemText extends moveClip{
 
       let one = new Text('+', 0,  0, 30, 30)
       one.set({
+        shape: 2,
           bg: 'hsl(100, 50%, 30%)',
           fg: color(200)
       })
@@ -56,6 +57,7 @@ class itemText extends moveClip{
 
       let two = new Text('-', 0,  0, 30, 30)
       two.set({
+          shape: 2,
           bg: color(20),
           fg: color(200)
       })
@@ -110,12 +112,12 @@ class itemText extends moveClip{
       })
 
       this.fontA.set({
-        x: -ox + this.fontA.width*2,
+        x: -ox + this.fontA.width*2 + 10,
         y: yy
       })
 
       this.fontB.set({
-        x: -ox + this.fontA.width - 5,
+        x: -ox + this.fontA.width,
         y: yy
       })
       noStroke()
