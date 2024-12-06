@@ -137,10 +137,11 @@ class itemText extends moveClip{
 }
 
 
-
+let bg 
 let scene = new Scene()
 scene.setup = function(){
     this.childs = []
+    bg = newImage('res/ibg5.jpg')
     this.bg = 'hsl(180, 20%, 40%)'
 
     let tit = new Button({
@@ -161,7 +162,7 @@ scene.setup = function(){
     let lv = new listMenuView(cx, hh/2 + 120, width, hh)
     lv.direction = 'v'
     lv.hasBg = false
-    lv.displayItems = 2
+    lv.displayItems = 1
     lv.distanceofmove = 0
     lv.friction = 1
     lv.lineColor = 'hsl(30, 50%, 50%)'
@@ -176,6 +177,7 @@ scene.setup = function(){
     menu.lineColor = 'hsl(30, 50%, 50%)'
     menu.space = 16
     menu.showLine = false
+    menu.indexValue = 1
     menu.onChange = function() {
 
     }
@@ -197,6 +199,8 @@ scene.setup = function(){
             b.iconSize = 0
             b.text = '/' + (parseInt(k)+1) + '/\r\n' + v.text 
             b.ncount = v.count
+            b.bgImage = bg
+            // b.bgColorImage = color(200)
             // b.clip = false
             // b.shape = 2
             b.bg = 'hsl(180, 20%, 45%)'
@@ -211,6 +215,7 @@ scene.setup = function(){
         for (let i = 0; i < e.length; i++) {
             const v = e[i];
             let b = new Text()
+            b.indexItem = i + 1
             b.alignText = 'center'
             b.iconSize = 0
             b.text = v.category 
@@ -221,11 +226,21 @@ scene.setup = function(){
             b.corner = [20]
             b.fontSize = 12
             b.array = v.array
+            b.update = function(){
+              let p = this.Parent()
+              if (p && p.indexValue == this.indexItem) {
+                this.stroke = 'hsl(30, 60%, 60%)'
+                this.strokeWidth = 2
+              }else{
+                this.stroke = null
+              }
+            }
             b.ontap = function(){
                 let p = this.Parent()
                 let item = this
                 if (!p.moving) {
-                    loadItem(item)
+                  p.indexValue = this.indexItem
+                  loadItem(item)
                 }
             }
             b.mousepressed = function(x, y, b){
@@ -237,6 +252,13 @@ scene.setup = function(){
 
             b.mousereleased = function() {
                 this.opacity = 100
+            }
+            b.onEnter = function(){
+    
+            }
+            b.onLeave = function(){
+              this.opacity = 100
+
             }
             menu.addItem(b)
         }
