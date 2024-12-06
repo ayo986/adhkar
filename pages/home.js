@@ -41,7 +41,7 @@ class itemText extends moveClip{
         shape: 2,
           bg: 'hsl(180, 30%, 40%)',
           fg: color(200),
-          fontSize: 25,
+          fontSize: 16,
       })
       one.mousepressed = function(x, y, b){
         let p = this.Parent().Parent()
@@ -60,7 +60,7 @@ class itemText extends moveClip{
           shape: 2,
           bg: 'hsl(180, 30%, 40%)',
           fg: color(200),
-          fontSize: 25,
+          fontSize: 16,
       })
       two.mousepressed = function(x, y, b){
         let p = this.Parent().Parent()
@@ -75,7 +75,7 @@ class itemText extends moveClip{
       }
       this.timer = b
 
-      let group = new listMenuView(0, 0, 100, 50)
+      let group = new listMenuView(0, 0, 80, 40)
       group.direction = 'h'
       group.hasBg = false
       group.displayItems = 2
@@ -98,11 +98,16 @@ class itemText extends moveClip{
       c.setAlpha(alpha)
 
       noStroke()
+      push()
+      drawingContext.save()
+      fill(255, 50)
+      rect(-ox+w/2 , -oy+h/2 , this.width * 0.95, this.height * 0.9)
+      drawingContext.clip()
       let rgb = this.ncount > 0 ? this.toggel.defualt : this.toggel.other
-      fill(rgb)
+      // fill(rgb)
       let r = 20
-      let xx = ox - r - 5
-      let yy = -oy  + r + 5
+      let xx = (-ox + w ) * 0.95- r - 10
+      let yy = -oy  + r *2 + 10
       this.timer.set({
         x: xx,
         y: yy,
@@ -119,8 +124,8 @@ class itemText extends moveClip{
       })
 
       this.group.set({
-        x: -ox + this.group.width/2,
-        y: -oy + this.group.height/2 
+        x: (-ox + w/2) - w*0.95/2 + this.group.width/2 + 10,
+        y: this.timer.y
 
       })
       noStroke()
@@ -135,7 +140,8 @@ class itemText extends moveClip{
       text(
         this.text, -ox+w/2 , -oy+h/2 + this.height*0.1 , this.width * 0.8, this.height * 0.9)
 
-
+        drawingContext.restore()
+        pop()
     }
 }
 
@@ -211,7 +217,7 @@ scene.setup = function(){
             b.bg = 'hsl(180, 20%, 45%)'
             b.fg = [0]
             // b.hasBg = false
-            b.fontSize = 16
+            b.fontSize = 21
             // b.corner = [20]
             lv.addItem(b)
 
@@ -253,7 +259,7 @@ scene.setup = function(){
             b.mousepressed = function(x, y, b){
                 
                 if (b == 1) {
-                    this.opacity = 50
+                    // this.opacity = 50
                 }
             }
 
