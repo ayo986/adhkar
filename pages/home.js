@@ -92,6 +92,7 @@ class itemText extends moveClip{
       textFont(this.font)
       textSize(this.fontSize)
       rectMode(CENTER)
+      imageMode(CENTER)
       let [ox, oy] = this.Origin()
       let [w, h] = this.Size()
       let c = color(this.fg)
@@ -102,7 +103,10 @@ class itemText extends moveClip{
       drawingContext.save()
       fill(255, 50)
       rect(-ox+w/2 , -oy+h/2 , this.width * 0.95, this.height * 0.9)
+      tint(this.imageColor)
+      image(this.image, -ox + w/2, -oy + h/2, this.width * 0.95, this.height * 0.9)
       drawingContext.clip()
+
       let rgb = this.ncount > 0 ? this.toggel.defualt : this.toggel.other
       // fill(rgb)
       let r = 20
@@ -210,13 +214,14 @@ scene.setup = function(){
             b.iconSize = 0
             b.text = '/' + (parseInt(k)+1) + '/\r\n' + v.text 
             b.ncount = v.count
-            b.bgImage = bg
+            b.image = bg
             // b.bgColorImage = color(200)
             // b.clip = false
             // b.shape = 2
             b.bg = 'hsl(180, 20%, 45%)'
             b.fg = [0]
             // b.hasBg = false
+            b.imageColor = color(255, 150)
             b.fontSize = 21
             // b.corner = [20]
             lv.addItem(b)
