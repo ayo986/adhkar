@@ -39,11 +39,12 @@ class itemText extends moveClip{
       let one = new Text('+', 0,  0, 30, 30)
       one.set({
         shape: 2,
-          bg: 'hsl(100, 50%, 30%)',
-          fg: color(200)
+          bg: 'hsl(140, 20%, 40%)',
+          fg: color(200),
+          fontSize: 25,
       })
       one.mousepressed = function(x, y, b){
-        let p = this.Parent()
+        let p = this.Parent().Parent()
         if (b == 1) {
             this.opacity = 50
             p.fontSize = p.fontSize + 1
@@ -53,17 +54,16 @@ class itemText extends moveClip{
       one.mousereleased = function(x, y, b){
         this.opacity = 100
       }
-      this.pack(one)
 
       let two = new Text('-', 0,  0, 30, 30)
       two.set({
           shape: 2,
-          bg: color(20),
-          fg: color(200)
+          bg: 'hsl(140, 20%, 40%)',
+          fg: color(200),
+          fontSize: 25,
       })
-
       two.mousepressed = function(x, y, b){
-        let p = this.Parent()
+        let p = this.Parent().Parent()
         if (b == 1) {
             this.opacity = 50
             p.fontSize = p.fontSize - 1
@@ -73,10 +73,17 @@ class itemText extends moveClip{
       two.mousereleased = function(x, y, b){
         this.opacity = 100
       }
-      this.pack(two)
       this.timer = b
-      this.fontA = one
-      this.fontB = two
+
+      let group = new listMenuView(0, 0, 100, 50)
+      group.direction = 'h'
+      group.hasBg = false
+      group.displayItems = 2
+      this.group = group
+      
+      this.group.addItem(two)
+      this.group.addItem(one)
+      this.pack(group)
     }
 
     draw(){
@@ -111,14 +118,10 @@ class itemText extends moveClip{
         }
       })
 
-      this.fontA.set({
-        x: -ox + this.fontA.width*2 + 10,
-        y: yy
-      })
+      this.group.set({
+        x: -ox + this.group.width/2,
+        y: -oy + this.group.height/2 
 
-      this.fontB.set({
-        x: -ox + this.fontA.width,
-        y: yy
       })
       noStroke()
       noFill()
@@ -157,6 +160,8 @@ scene.setup = function(){
         bg: 'hsl(180, 60%, 20%)'
     })
     this.pack(tit)
+
+
 
     let hh = height - 120
     let lv = new listMenuView(cx, hh/2 + 120, width, hh)
@@ -209,6 +214,8 @@ scene.setup = function(){
             b.fontSize = 16
             // b.corner = [20]
             lv.addItem(b)
+
+            
         }
     }
     loadJSON('adhkar/adhkar.json',(e)=>{
