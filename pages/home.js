@@ -39,7 +39,7 @@ class itemText extends moveClip{
       let one = new Text('+', 0,  0, 30, 30)
       one.set({
         shape: 2,
-          bg: 'hsl(180, 60%, 30%)',
+          bg: 'hsl(180, 30%, 40%)',
           fg: color(200),
           fontSize: 25,
       })
@@ -58,7 +58,7 @@ class itemText extends moveClip{
       let two = new Text('-', 0,  0, 30, 30)
       two.set({
           shape: 2,
-          bg: 'hsl(180, 60%, 30%)',
+          bg: 'hsl(180, 30%, 40%)',
           fg: color(200),
           fontSize: 25,
       })
