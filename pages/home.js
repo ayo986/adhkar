@@ -22,10 +22,9 @@ class itemText extends moveClip{
     this.text = text
 
     let timer = new Text()
-
     timer.set({
       shape: 2,
-      fontSize: 21,
+      fontSize: 24,
       origin: CENTER_CENTER,
       shadowBlur: 10,
       shadowColor: 'hsl(100, 50%, 70%)',
@@ -106,7 +105,7 @@ class itemText extends moveClip{
       bg: rgb,
       fg: this.textColor,
       text: this.ncount,
-      fontSize: 14,
+      fontSize: 24,
       toggel: {
           defualt: [200, 100, 50],
           other: [50, 100, 200]
