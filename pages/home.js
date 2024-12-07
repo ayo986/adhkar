@@ -94,7 +94,7 @@ class itemText extends moveClip{
     let [w, h] = this.Size()
     let r = 40
     let xx = (-ox) * 0.95 + r + 15
-    let yy = (-oy + h)*0.95  - r*1.5
+    let yy = (-oy + h)*0.95  - r*2
     let rgb = this.ncount > 0 ? this.toggel.defualt : this.toggel.other
     this.timer.set({
       x: xx,
