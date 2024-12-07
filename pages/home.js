@@ -93,8 +93,8 @@ class itemText extends moveClip{
     let [ox, oy] = this.Origin()
     let [w, h] = this.Size()
     let r = 40
-    let xx = (-ox + w ) * 0.95- r - 10
-    let yy = (-oy + h)*0.95  - r*2
+    let xx = (-ox) * 0.95 + r + 15
+    let yy = (-oy + h)*0.95  - r*1.5
     let rgb = this.ncount > 0 ? this.toggel.defualt : this.toggel.other
     this.timer.set({
       x: xx,
@@ -141,7 +141,7 @@ class itemText extends moveClip{
     }
     fill('hsl(180, 50%, 40%)')
     ellipse(ox - 40, -oy + 40, 80, 80)
-    fill(200)
+    fill(0)
     text(this.id, ox - 45, -oy + 40)
     fill(this.fg)
     textSize(this.fontSize)
