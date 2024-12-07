@@ -142,6 +142,7 @@ class itemText extends moveClip{
     fill('hsl(180, 50%, 40%)')
     ellipse(ox - 40, -oy + 40, 80, 80)
     fill(0)
+    textSize(21)
     text(this.id, ox - 45, -oy + 40)
     fill(this.fg)
     textSize(this.fontSize)
