@@ -139,7 +139,7 @@ class itemText extends moveClip{
       tint(this.imageColor || 255)
       image(this.image, -ox + w/2, -oy + h/2, this.width * 0.95, this.height * 0.9)
     }
-    fill(0)
+    fill('hsl(180, 50%, 40%)')
     ellipse(ox - 40, -oy + 40, 80, 80)
     fill(200)
     text(this.id, ox - 45, -oy + 40)
