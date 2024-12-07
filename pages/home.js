@@ -80,7 +80,7 @@ class itemText extends moveClip{
       this.opacity = 100
     }
     
-    let group = new listMenuView(0, 0, 80, 40)
+    let group = new listMenuView(0, 0, 80, 45)
     group.direction = 'h'
     group.hasBg = false
     group.displayItems = 2
@@ -92,9 +92,9 @@ class itemText extends moveClip{
   mupdate(){
     let [ox, oy] = this.Origin()
     let [w, h] = this.Size()
-    let r = 20
+    let r = 30
     let xx = (-ox + w ) * 0.95- r - 10
-    let yy = -oy  + r *2 + 10
+    let yy = (-oy + h)*0.95  - r*2
     let rgb = this.ncount > 0 ? this.toggel.defualt : this.toggel.other
     this.timer.set({
       x: xx,
@@ -113,7 +113,7 @@ class itemText extends moveClip{
 
     this.group.set({
       x: (-ox + w/2) - w*0.95/2 + this.group.width/2 + 10,
-      y: this.timer.y
+      y: (-oy + h/2)- h*0.95/2 + this.group.height/2 + 20
 
     })
   }
@@ -139,9 +139,13 @@ class itemText extends moveClip{
       tint(this.imageColor || 255)
       image(this.image, -ox + w/2, -oy + h/2, this.width * 0.95, this.height * 0.9)
     }
+    fill(0)
+    ellipse(ox - 40, -oy + 40, 80, 80)
+    fill(200)
+    text(this.id, ox - 45, -oy + 40)
     fill(this.fg)
     textSize(this.fontSize)
-    text(this.text, -ox+w/2 , -oy+h/2 + this.height*0.1 , this.width * 0.8, this.height * 0.9)
+    text(this.text, -ox+w/2 , -oy+h/2 + this.height*0.19 , this.width * 0.8, this.height * 0.9)
     drawingContext.restore()
   }
 }
@@ -160,7 +164,8 @@ function loadItem(item) {
   for (const k in item.array) {
       let v = item.array[k]
       let b = new itemText()
-      b.text = '/' + (parseInt(k)+1) + '/\r\n' + v.text 
+      b.id = parseInt(k)+1
+      b.text =  v.text 
       b.ncount = v.count
       b.image = bg
       // b.imageColor = color(0, 30)
