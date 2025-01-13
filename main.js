@@ -65,6 +65,12 @@ function draw(){
         background(0)
     }
 
+    let rgb = color(255)
+    rgb.setAlpha(255)
+    fill(rgb)
+    noStroke()
+    tint(rgb)
+    strokeWeight(1)
     Stage_Master.on_draw()
   
     // fill(255, 0, 0)
@@ -141,7 +147,7 @@ function mouseDragged(){
 }
 
 function mouseMoved() {
-    Stage_Master.on_mousemoved(mouseX, mouseY, pmouseX - mouseX, pmouseY - mouseY)
+    Stage_Master.on_mouseovermoved(mouseX, mouseY, pmouseX - mouseX, pmouseY - mouseY)
 }
 // 
 
